@@ -3,6 +3,9 @@ package Gun04;
 import org.testng.annotations.*;
 
 public class _01_Intro {
+    @BeforeTest void bTest(){
+        System.out.println("Before Test");
+    }
     @BeforeSuite
     void bSuite(){
         System.out.println("Before Suite");
@@ -50,5 +53,9 @@ public class _01_Intro {
     @AfterSuite
     void aSuite(){
         System.out.println("After Suite");
+    }
+    @AfterTest
+    void aTest(){
+        System.out.println("After Test");
     }
 }
