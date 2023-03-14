@@ -19,13 +19,13 @@ public class _04_ContactUs extends BaseDriver {
     @Parameters("mesaj")// xml deki parametre adı aynı olmak zorunda
     void contactUs(String gelenMesaj){
         // String gelenMesaj:metod için gerekli tanımlama aynı olmak zorunda değil
-        driver.get("https://opencart.abstracta.us/index.php?route=account/login");
-        WebElement email = driver.findElement(By.xpath("//*[@name='email']"));
-        email.sendKeys("asdasdasd123@gmail.com");
-        WebElement password = driver.findElement(By.xpath("//*[@name='password']"));
-        password.sendKeys("asdasd123");
-        WebElement loginBtn = driver.findElement(By.xpath("//*[@value='Login']"));
-        loginBtn.click();
+     //  driver.get("https://opencart.abstracta.us/index.php?route=account/login");
+     //  WebElement email = driver.findElement(By.xpath("//*[@name='email']"));
+     //  email.sendKeys("asdasdasd123@gmail.com");
+     //  WebElement password = driver.findElement(By.xpath("//*[@name='password']"));
+     //  password.sendKeys("asdasd123");
+     //  WebElement loginBtn = driver.findElement(By.xpath("//*[@value='Login']"));
+     //  loginBtn.click();
         WebElement contactUsBtn= driver.findElement(By.linkText("Contact Us"));
         contactUsBtn.click();
 

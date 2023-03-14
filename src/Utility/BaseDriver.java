@@ -35,7 +35,13 @@ public class BaseDriver {
         driver.manage().timeouts().pageLoadTimeout(dr);
         driver.manage().timeouts().implicitlyWait(dr);
         wait=new WebDriverWait(driver,Duration.ofSeconds(30));
-
+        driver.get("https://opencart.abstracta.us/index.php?route=account/login");
+        WebElement email = driver.findElement(By.xpath("//*[@name='email']"));
+        email.sendKeys("asdasdasd123@gmail.com");
+        WebElement password = driver.findElement(By.xpath("//*[@name='password']"));
+        password.sendKeys("asdasd123");
+        WebElement loginBtn = driver.findElement(By.xpath("//*[@value='Login']"));
+        loginBtn.click();
 
     }
     @AfterClass
