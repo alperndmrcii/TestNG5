@@ -1,6 +1,6 @@
 package Gun05;
 
-import Utility.BaseDriver;
+
 import Utility.BaseDriverParameter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -16,7 +16,7 @@ import java.util.List;
  */
 
 
-public class _04_Task extends BaseDriver {
+public class _05_Task_2 extends BaseDriverParameter {
 
     @Test(dataProvider = "getData")
     void SearchFunction(String text)
