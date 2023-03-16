@@ -49,7 +49,6 @@ public class BaseDriverParameter {
                 ChromeOptions options = new ChromeOptions();
                 options.addArguments("--remote-allow-origins=*");
                 driver = new ChromeDriver(options);
-                break;
         }
 
 
