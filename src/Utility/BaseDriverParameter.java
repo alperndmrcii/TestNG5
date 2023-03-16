@@ -6,6 +6,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeDriverService;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -21,7 +22,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class BaseDriverParameter {
-    public static WebDriver driver;
+
+    public WebDriver driver; //
     public static WebDriverWait wait;
 
     @BeforeClass
@@ -30,24 +32,31 @@ public class BaseDriverParameter {
         Logger logger = Logger.getLogger("");
         logger.setLevel(Level.SEVERE);
 
-        if (browserTipi.equalsIgnoreCase("firefox")) {
-            System.setProperty(FirefoxDriver.SystemProperty.BROWSER_LOGFILE, "/dev/null");
-            driver = new FirefoxDriver();
+        switch (browserTipi.toLowerCase()) {
+            case "firefox":
+                System.setProperty(FirefoxDriver.SystemProperty.BROWSER_LOGFILE, "/dev/null");
+                driver = new FirefoxDriver();
+                System.out.println("Firefox Started");
+                break;
 
+            case "safari":
+                driver = new SafariDriver();
+                System.out.println("Safari Started");
+                break;
 
-
-        } else {
-            System.setProperty(ChromeDriverService.CHROME_DRIVER_SILENT_OUTPUT_PROPERTY, "true");
-            ChromeOptions options = new ChromeOptions();
-            options.addArguments("--remote-allow-origins=*");
-            driver = new ChromeDriver(options);
-
+            default:
+                System.setProperty(ChromeDriverService.CHROME_DRIVER_SILENT_OUTPUT_PROPERTY, "true");
+                ChromeOptions options = new ChromeOptions();
+                options.addArguments("--remote-allow-origins=*");
+                driver = new ChromeDriver(options);
         }
+
 
         driver.manage().window().maximize();
         Duration dr = Duration.ofSeconds(30);
         driver.manage().timeouts().pageLoadTimeout(dr);
         driver.manage().timeouts().implicitlyWait(dr);
+
         wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         driver.get("https://opencart.abstracta.us/index.php?route=account/login");
         WebElement email = driver.findElement(By.xpath("//*[@name='email']"));
@@ -66,7 +75,7 @@ public class BaseDriverParameter {
         driver.quit();
     }
 
-    public static void screenShotAl() throws IOException {
+    public void screenShotAl() throws IOException {
         TakesScreenshot ss = (TakesScreenshot) driver; // 1.aşama ekran görüntü alma değişkenini tanımladım
         File hafizadakiHali = ss.getScreenshotAs(OutputType.FILE); // 2. aşamada ekran görüntüsü alındı şuan hafızada
         // hafızadaki bu bilgiyi dosya olarak kaydetmem gerek
