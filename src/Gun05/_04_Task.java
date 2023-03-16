@@ -27,7 +27,7 @@ public class _04_Task extends BaseDriver {
 
         List<WebElement> captions = driver.findElements(By.cssSelector("div[class='caption']>h4"));
         for (WebElement e : captions)
-            Assert.assertTrue(e.getText().toLowerCase().contains(text));
+            Assert.assertTrue(e.getText().toLowerCase().contains(text.toLowerCase()));
     }
 
     @DataProvider
