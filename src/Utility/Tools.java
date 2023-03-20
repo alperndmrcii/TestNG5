@@ -24,16 +24,19 @@ public class Tools {
         return (int) (Math.random() * max); // 0,1,2,3 gelir
     }
 
-    public static void listContainsString(List<WebElement> list, String aranacakKelime) {
+    public static void listContainsString(List<WebElement> list, String aranacakKelime){
 
-        boolean bulundu = false;
-        for (WebElement e : list) {
-            if (e.getText().toLowerCase().contains(aranacakKelime)) {
-                bulundu = true;
+        boolean bulundu=false;
+        for(WebElement e: list){
+            if (e.getText().toLowerCase().contains(aranacakKelime.toLowerCase()))
+            {
+                bulundu=true;
                 break;
             }
         }
-        if (!bulundu)
+
+        if (bulundu==false)
             Assert.fail();
+
     }
 }

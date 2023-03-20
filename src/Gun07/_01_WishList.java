@@ -25,29 +25,34 @@ public class _01_WishList extends BaseDriver {
      */
     @Test
     @Parameters("aranacakKelime")
-    void Test1(String text) {
+    void addToWishList(String text){
+
         WebElement searchInput= driver.findElement(By.cssSelector("[name='search']"));
         searchInput.sendKeys(text);
 
         WebElement searchButton= driver.findElement(By.cssSelector("[class='btn btn-default btn-lg']"));
         searchButton.click();
 
-        List<WebElement> searchResult = driver.findElements(By.cssSelector("div[class='caption']>h4>a"));
+        List<WebElement> searhResult=driver.findElements(By.cssSelector("div[class='caption']>h4>a"));
+        int randomSecim= Tools.RandomGenerator(searhResult.size()); // 0,1,2,3
+        String wishItemText=searhResult.get(randomSecim).getText(); // tıklatılacak elemanın ismini aldım
+        System.out.println("wishItemText = " + wishItemText);
 
-        int randomSecim=Tools.RandomGenerator(searchResult.size()); // 0-1-2-3
-        String wishItemText=searchResult.get(randomSecim).getText(); // tıklatılacak elemanın ismini aldım
-        System.out.println(wishItemText);
+        List<WebElement> wishBtnList=driver.findElements(By.xpath("//button[@data-original-title='Add to Wish List']"));
+        wishBtnList.get(randomSecim).click();  // random elementin wish listine tıklattım
 
-        List<WebElement> wishBtnList= driver.findElements(By.xpath("//button[@data-original-title='Add to Wish List']"));
-        wishBtnList.get(randomSecim).click(); // random elementin wishlistine tıklattım.
+        WebElement btnWisthProducts=driver.findElement(By.id("wishlist-total"));
+        btnWisthProducts.click();
 
-        WebElement btnWishList=driver.findElement(By.id("wishlist-total"));
-        btnWishList.click();
-        List<WebElement> wishTableNames=driver.findElements(By.cssSelector("[class='text-left']>a"));
+        List<WebElement> wishTableNames = driver.findElements(By.cssSelector("[class='text-left']>a"));
 
-
-
-
+        // wishItemText  i  wishTableNames  ın gettext lerinde varmı diye kontrol edeceğim.
+        Tools.listContainsString(wishTableNames, wishItemText);
 
     }
+
+
+
+
+
 }
